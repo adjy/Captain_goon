@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Ships.Alien;
 import com.mygdx.game.Ships.Captain;
+import com.mygdx.game.Ships.Roundysh;
 import com.mygdx.game.Ships.Ship;
+import com.mygdx.game.exceptions.InvalidPositionException;
 
 public class MyGdxGame extends ApplicationAdapter {
 	Texture imgBackgroung;
@@ -18,6 +20,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	String GAME_NAME = "Captain Goon";
 	Captain captain;
 	Alien alien;
+	Roundysh roundysh;
+	Roundysh roundysh2;
 
 	/*Screen */
 	private void screen(){
@@ -36,9 +40,16 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		captain = new Captain("Sedar");
 		alien = new Alien();
+		roundysh = new Roundysh();
+		roundysh2 = new Roundysh(Gdx.graphics.getWidth());
+		roundysh2.setxPosition(Gdx.graphics.getWidth()-roundysh2.getImgage().getWidth());
+
 
 		System.out.println(captain);
 		System.out.println(alien);
+		int a = 0;
+
+		System.out.println( (a +10) % 20 );
 
 	}
 	public void lifeStats(Ship captain, int alien){
@@ -61,10 +72,32 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(captain.getImgage(),captain.getxPosition(),captain.getyPosition());
 		batch.draw(alien.getImgage(), alien.getxPosition(),alien.getyPosition(), alien.getImgage().getWidth()/2, alien.getImgage().getHeight()/2, alien.getImgage().getWidth(), alien.getImgage().getHeight(), 1, 1, 180, 0, 0, alien.getImgage().getWidth(), alien.getImgage().getHeight(), false, false);
 
+		batch.draw(roundysh.getImgage(), roundysh.getxPosition(),roundysh.getyPosition(), roundysh.getImgage().getWidth()/2, roundysh.getImgage().getHeight()/2, roundysh.getImgage().getWidth(), roundysh.getImgage().getHeight(), 1, 1, 180, 0, 0, roundysh.getImgage().getWidth(), roundysh.getImgage().getHeight(), false, false);
+		batch.draw(roundysh2.getImgage(), roundysh2.getxPosition(),roundysh2.getyPosition(), roundysh2.getImgage().getWidth()/2, roundysh2.getImgage().getHeight()/2, roundysh2.getImgage().getWidth(), roundysh2.getImgage().getHeight(), 1, 1, 180, 0, 0, roundysh2.getImgage().getWidth(), roundysh2.getImgage().getHeight(), false, false);
+
 //		batch.draw(alien.getImgage(),alien.getxPosition(),alien.getyPosition());
 
 		captain.move();
-		alien.move(50, Gdx.graphics.getWidth() - alien.getImgage().getWidth());
+		roundysh.move();
+		roundysh2.move();
+
+
+		try {
+			alien.move(0, Gdx.graphics.getWidth() - alien.getImgage().getWidth());
+//			roundysh.move(Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth() - alien.getImgage().getWidth());
+
+
+
+
+		}
+		catch (InvalidPositionException e){
+			alien.move();
+			roundysh.move();
+
+
+			e.printStackTrace();
+
+		}
 		lifeStats(captain, 0);
 //
 //		System.out.println("Screen X: " + Gdx.graphics.getWidth() + " x position: "+ alien.getxPosition());

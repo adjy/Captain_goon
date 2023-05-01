@@ -8,8 +8,7 @@ abstract public class Ship {
     private int maxLife;
     private int xPosition;
     private int yPosition;
-    private int xSpeed;
-    private int ySpeed;
+
 
     public int getStamina() {
         return stamina;
@@ -65,22 +64,6 @@ abstract public class Ship {
 
     public void setyPosition(int yPosition) {
         this.yPosition = yPosition;
-    }
-
-    public int getxSpeed() {
-        return xSpeed;
-    }
-
-    public void setxSpeed(int xSpeed) {
-        this.xSpeed = xSpeed;
-    }
-
-    public int getySpeed() {
-        return ySpeed;
-    }
-
-    public void setySpeed(int ySpeed) {
-        this.ySpeed = ySpeed;
     }
 
     public String getName() {
