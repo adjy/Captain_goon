@@ -34,6 +34,8 @@ public class Captain extends Ship{
 
         int positionY = Gdx.graphics.getHeight() - Gdx.input.getY() - (this.getImgage().getHeight()/2); // Calculate paddle y position based on mouse position
         int maxY = (Gdx.graphics.getHeight()* 80) / 100;
+//        int maxY = 0;
+
         if(positionY > 0 && positionY < Gdx.graphics.getHeight() - maxY)
             setyPosition(positionY);
         else if(positionY >  Gdx.graphics.getHeight() - maxY)

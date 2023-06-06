@@ -22,6 +22,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	Alien alien;
 	Roundysh roundysh;
 	Roundysh roundysh2;
+	Texture captainPicture ;
+	Texture alienPicture;
+//	private VideoPlayer videoPlayer;
+	private Texture videoTexture;
 
 	/*Screen */
 	private void screen(){
@@ -43,6 +47,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		roundysh = new Roundysh();
 		roundysh2 = new Roundysh(Gdx.graphics.getWidth());
 		roundysh2.setxPosition(Gdx.graphics.getWidth()-roundysh2.getImgage().getWidth());
+		captainPicture =  new Texture("sprites/ships/blueships1_small.png");
+		alienPicture = new Texture("sprites/ships/spco_small.png");
 
 
 		System.out.println(captain);
@@ -52,20 +58,22 @@ public class MyGdxGame extends ApplicationAdapter {
 		System.out.println( (a +10) % 20 );
 
 	}
-	public void lifeStats(Ship captain, int alien){
+	public void lifeStats(Texture captainPicture, int captainStat,  Texture alienPicture, int alienStat){
 		BitmapFont captainLife = new BitmapFont();
+		BitmapFont alienLife = new BitmapFont();
 
-		batch.draw( captain.getImgage(),0,15, 40,40);
-		captainLife.draw(batch, String.format("%d %%",captain.getLife()), 50, 40);
+		batch.draw( captainPicture,0,15, 40,40);
+		captainLife.draw(batch, String.format("%d %%",captainStat), 50, 40);
 
-
-
+		batch.draw( alienPicture,Gdx.graphics.getWidth() - 40,15, 40,40);
+		alienLife.draw(batch, String.format("%d %%",alienStat),  Gdx.graphics.getWidth() - 2*40, 40);
 
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
+
 		batch.begin();
 		batch.draw(imgBackgroung, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -98,7 +106,8 @@ public class MyGdxGame extends ApplicationAdapter {
 			e.printStackTrace();
 
 		}
-		lifeStats(captain, 0);
+
+		lifeStats(captainPicture,captain.getLife(),alienPicture,captain.getLife());
 //
 //		System.out.println("Screen X: " + Gdx.graphics.getWidth() + " x position: "+ alien.getxPosition());
 
